@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace SocialMedia.Api.Tests.Integration;
@@ -20,8 +19,10 @@ public class ProgramTests
         // Arrange
         var client = _factory.CreateClient();
         // Act
-        var result = await client.GetAsync("");
+        var response = await client.GetAsync("");
         // Assert   
-        result.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
+        Assert.AreEqual("text/html", 
+            response.Content.Headers.ContentType?.ToString());
     }
 }
