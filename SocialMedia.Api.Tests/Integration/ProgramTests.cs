@@ -15,9 +15,13 @@ public class ProgramTests
     }
 
     [TestMethod]
-    public void WebApp_Should_CreateClientSuccessfully()
+    public async Task WebApp_Should_CreateClientSuccessfully()
     {
         // Arrange
-        _factory.CreateClient();
+        var client = _factory.CreateClient();
+        // Act
+        var result = await client.GetAsync("");
+        // Assert   
+        result.EnsureSuccessStatusCode();
     }
 }
