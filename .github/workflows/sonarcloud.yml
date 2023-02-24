@@ -54,8 +54,8 @@ jobs:
         working-directory: ./SocialMedia.Api/SPA/react-app
         run: yarn jest --coverage
       - name: SonarCloud Scan front-end
-        working-directory: ./SocialMedia.Api/SPA/react-app
         uses: SonarSource/sonarcloud-github-action@master
+        working-directory: ./SocialMedia.Api/SPA/react-app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets. SONARCLOUD_TOKEN }}
