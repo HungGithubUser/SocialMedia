@@ -1,4 +1,4 @@
-name: SonarCloud analysis
+name: SonarCloud analysis BE
 on:
   push:
     branches:
@@ -47,14 +47,3 @@ jobs:
           dotnet build --no-incremental -c Release
           dotnet-coverage collect "dotnet test -c Release" -f xml -o "coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-      - name: Install yarn
-        working-directory: ./SocialMedia.Api/SPA/react-app
-        run: yarn
-      - name: Test and coverage front-end
-        working-directory: ./SocialMedia.Api/SPA/react-app
-        run: yarn jest --coverage
-      - name: SonarCloud Scan front-end
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets. SONARCLOUD_TOKEN }}
