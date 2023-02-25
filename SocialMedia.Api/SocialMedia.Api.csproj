@@ -28,7 +28,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <SonarQubeSetting Include="sonar.coverage.exclusions" Value="$(SpaRoot)**"/>
+        <SonarQubeSetting Include="sonar.coverage.exclusions" Value="$(SpaRoot)**\*.*"/>
     </ItemGroup>
     
     <ItemGroup>
