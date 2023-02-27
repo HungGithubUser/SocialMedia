@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <SpaRoot>SPA\react-app\</SpaRoot>
+        <SpaRoot>Spa\react-app\</SpaRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**;wwwroot\index.html</DefaultItemExcludes>
         <SpaProxyServerUrl>http://localhost:44441</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
