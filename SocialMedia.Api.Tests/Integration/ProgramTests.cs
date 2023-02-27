@@ -32,7 +32,7 @@ public class ProgramTests
     public async Task WebApp_Should_CreateClientSuccessfully_WithProductionEnvironment()
     {
         // Arrange
-        _factory.WithWebHostBuilder(builder => { builder.UseEnvironment(Environments.Staging); });
+        _factory = _factory.WithWebHostBuilder(builder => { builder.UseEnvironment(Environments.Production); });
         var client = _factory.CreateClient();
         // Act
         var response = await client.GetAsync("");
