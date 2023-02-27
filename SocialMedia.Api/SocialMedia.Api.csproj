@@ -28,12 +28,6 @@
     </ItemGroup>
     
     <ItemGroup>
-        <SonarQubeSetting Include="sonar.coverage.exclusions">
-            <Value>**/SPA/**/*.*</Value>
-        </SonarQubeSetting>
-    </ItemGroup>
-    
-    <ItemGroup>
       <ProjectReference Include="..\SocialMedia.Core\SocialMedia.Core.csproj" />
     </ItemGroup>
 
