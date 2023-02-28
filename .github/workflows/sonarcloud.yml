@@ -43,7 +43,7 @@ jobs:
         shell: powershell
         run: |
           dotnet tool install --global dotnet-coverage
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"HungGithubUser_SocialMedia" `
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"SocialMedia_BE" `
           /o:"hunggithubuser" `
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" `
           /d:sonar.host.url="https://sonarcloud.io" `
@@ -52,3 +52,15 @@ jobs:
           dotnet build --no-incremental -c Release
           dotnet-coverage collect "dotnet test -c Release" -f xml -o "coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      - name: Test and coverage react
+        working-directory: SocialMedia.Api/Spa/react-app
+        run: npm test -- --coverage
+      - name: Analyze react
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: SocialMedia.Api/Spa/react-app
+          args: >
+            -Dsonar.projectKey=SocialMedia_FE
