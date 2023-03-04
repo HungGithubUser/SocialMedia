@@ -25,4 +25,5 @@ jobs:
                                   projectBaseDir: SocialMedia.Api/Spa/react-app
                                   args: >
                                           -Dsonar.projectKey=SocialMedia_FE            
+                                          -Dsonar.organization=hunggithubuser            
                                         
