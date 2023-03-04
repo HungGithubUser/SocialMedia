@@ -16,6 +16,12 @@ jobs:
                         - uses: actions/checkout@v3
                           with:
                                   fetch-depth: 0
+                        - name: Install react
+                          working-directory: SocialMedia.Api/Spa/react-app
+                          run: npm install
+                        - name: Test and coverage react
+                          working-directory: SocialMedia.Api/Spa/react-app
+                          run: npm test -- --coverage
                         - name: SonarCloud Scan
                           uses: SonarSource/sonarcloud-github-action@master
                           env:
