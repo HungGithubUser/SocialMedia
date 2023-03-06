@@ -33,4 +33,5 @@ jobs:
                                           -Dsonar.projectKey=SocialMedia_FE            
                                           -Dsonar.organization=hunggithubuser
                                           -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
-                                          -Dsonar.test.inclusions=**/*.test.tsx,**/*.test.ts
+                                          -Dsonar.test.inclusions=**/*.test.tsx
+                                          -Dsonar.test.inclusions=**/*.test.ts
