@@ -147,7 +147,7 @@ public class OpenXmlTests
                     var cell = new Cell
                     {
                         DataType = CellValues.String,
-                        CellValue = new CellValue(dsrow[col].ToString() ?? string.Empty)
+                        CellValue = new CellValue(dsrow[col].ToString() ?? string.Empty),
                     };
                     newRow.AppendChild(cell);
                 }
