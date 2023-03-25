@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Web;
 using Microsoft.Extensions.Configuration;
 
 namespace SocialMedia.Infrastructure.Tests;
@@ -32,9 +33,14 @@ public class FaceBookApiTests
 
     [DataTestMethod]
     [DataRow("https://www.facebook.com/anhchefvn/videos/518436523503472")]
+    [DataRow("https://www.facebook.com/watch/?v=518436523503472")]
     public void GetLikes_Success(string link)
     {
-        // Client.
+        var uri = new Uri(link);
+        var query = uri.Query;
+        var facebookId = string.IsNullOrEmpty(query) ? uri.Segments.Last() : HttpUtility.ParseQueryString(query)["v"];
+        
+        Assert.AreEqual("518436523503472", facebookId);
     }
 
     private static string? GetFacebookToken()
@@ -42,7 +48,7 @@ public class FaceBookApiTests
         var r = GetConfigurationRoot();
         return r.GetSection("FaceBook:Token").Value;
     }
-    
+
     private static string? GetFacebookCookie()
     {
         var r = GetConfigurationRoot();
@@ -51,7 +57,8 @@ public class FaceBookApiTests
 
     private static IConfigurationRoot GetConfigurationRoot()
     {
-        var builder = new ConfigurationBuilder().AddUserSecrets(Assembly.GetExecutingAssembly());
+        var builder = new ConfigurationBuilder()
+            .AddUserSecrets(Assembly.GetExecutingAssembly());
         var root = builder.Build();
         return root;
     }
