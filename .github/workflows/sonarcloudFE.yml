@@ -1,0 +1,36 @@
+﻿name: SonarCloud Front End
+on:
+        push:
+                branches:
+                        - master
+        pull_request:
+                types:
+                        - opened
+                        - synchronize
+                        - reopened
+jobs:
+        sonarcloud:
+                name: SonarCloud
+                runs-on: ubuntu-latest
+                steps:
+                        - uses: actions/checkout@v3
+                          with:
+                                  fetch-depth: 0
+                        - name: Install react
+                          working-directory: SocialMedia.Api/Spa/react-app
+                          run: npm install
+                        - name: Test and coverage react
+                          working-directory: SocialMedia.Api/Spa/react-app
+                          run: npm test -- --coverage
+                        - name: SonarCloud Scan
+                          uses: SonarSource/sonarcloud-github-action@master
+                          env:
+                                  GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+                                  SONAR_TOKEN: '${{ secrets.SONAR_TOKEN }}'
+                          with:
+                                  projectBaseDir: SocialMedia.Api/Spa/react-app
+                                  args: >
+                                          -Dsonar.projectKey=SocialMedia_FE            
+                                          -Dsonar.organization=hunggithubuser
+                                          -Dsonar.test.inclusions=**/*.test.tsx,**/*.test.ts
+                                          -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
